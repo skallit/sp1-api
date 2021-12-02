@@ -20,6 +20,9 @@ class CreateReservationsTable extends Migration
             $table->string('typeDay');
             $table->string('typeRoute');
             $table->string('status');
+            $table->foreignId('driver_id');
+            $table->foreignId('agencySeven_id');
+            $table->foreignId('vehicle_id');
             $table->timestamps();
         });
     }

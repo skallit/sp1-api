@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DriverFactory extends Factory
@@ -22,6 +23,7 @@ class DriverFactory extends Factory
             'proEmail' => $this->faker->unique()->safeEmail(),
             'phoneNumber' => $this->faker->phoneNumber(),
             'diverLicenseNumber' => $this->faker->numberBetween(1000000,9999999),
+            'user_id'=>User::inRandomOrder()->first()->id,
         ];
     }
 }

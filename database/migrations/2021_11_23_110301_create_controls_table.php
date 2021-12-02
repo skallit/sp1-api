@@ -17,6 +17,7 @@ class CreateControlsTable extends Migration
             $table->id();
             $table->integer('mileage');
             $table->date('date');
+            $table->foreignId('vehicle_id');
             $table->timestamps();
         });
     }

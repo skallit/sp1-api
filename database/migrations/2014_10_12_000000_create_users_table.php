@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('companyName');
             $table->timestamp('last_login_at')->nullable();
             $table->string('password');
+            $table->foreignId('contractForm_id');
             $table->rememberToken();
             $table->timestamps();
         });

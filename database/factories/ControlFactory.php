@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ControlFactory extends Factory
@@ -16,6 +17,7 @@ class ControlFactory extends Factory
         return [
             'mileage' => $this->faker->numberBetween(1000,15000),
             'date' => $this->faker->date(),
+            'vehicle_id'=>Vehicle::inRandomOrder()->first()->id,
         ];
     }
 }
