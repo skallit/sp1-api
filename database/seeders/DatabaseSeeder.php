@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
         ContractForm::factory(5)->create();
         User::create([
             'name'=>'Test',
+            'firstName'=> 'Tist',
+            'empowerment' => 'employee',
+            'companyName' => 'oui-oui',
+            'contractForm_id'=> 1,
             'email'=>'test@test.fr',
             'password'=>Hash::make('12345678'),
         ]);

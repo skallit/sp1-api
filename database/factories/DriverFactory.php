@@ -22,7 +22,7 @@ class DriverFactory extends Factory
             'city' => $this->faker->city(),
             'proEmail' => $this->faker->unique()->safeEmail(),
             'phoneNumber' => $this->faker->phoneNumber(),
-            'diverLicenseNumber' => $this->faker->numberBetween(1000000,9999999),
+            'driverLicenseNumber' => $this->faker->numberBetween(1000000,9999999),
             'user_id'=>User::inRandomOrder()->first()->id,
         ];
     }
