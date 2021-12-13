@@ -19,4 +19,8 @@ class Driver extends Model
         'phoneNumber',
         'driverLicenseNumber',
     ];
+
+    public function Reservations() {
+        return $this->hasMany('App\Models\Reservation');
+    }
 }

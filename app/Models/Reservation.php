@@ -16,4 +16,8 @@ class Reservation extends Model
         'typeRoute',
         'status',
     ];
+
+    public function drivers() {
+        return $this->belongsTo('App\Models\Driver');
+    }
 }

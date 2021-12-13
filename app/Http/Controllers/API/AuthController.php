@@ -24,4 +24,15 @@ class AuthController extends Controller
             return response()->json(['error'=>'Unauthorised'], 401);
         }
     }
+
+    /**
+     * getRegisteredUser api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getRegisteredUser()
+    {
+        $user = Auth::user();
+        return response()->json(['success' => $user], $this->successStatus);
+    }
 }
