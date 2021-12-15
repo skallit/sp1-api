@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -24,6 +26,35 @@ class AuthController extends Controller
             return response()->json(['error'=>'Unauthorised'], 401);
         }
     }
+
+    /**
+     * Register api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'firstName' => 'required',
+            'email' => 'required|email',
+            'empowerment' => 'required',
+            'password' => 'required',
+            'c_password' => 'required|same:password',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $input['companyName'] = Auth::user()->companyName;
+        $input['contractForm_id'] = Auth::user()->contractForm_id;
+        $user = User::create($input);
+        $success['token'] =  $user->createToken(env('APP_NAME'))->accessToken;
+        $success['name'] =  $user->name;
+        return response()->json(['success'=>$success], $this->successStatus);
+    }
+
 
     /**
      * getRegisteredUser api

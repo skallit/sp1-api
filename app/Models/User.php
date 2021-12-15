@@ -25,6 +25,7 @@ class User extends Authenticatable
         'empowerment',
         'companyName',
         'password',
+        'contractForm_id'
     ];
 
     /**
