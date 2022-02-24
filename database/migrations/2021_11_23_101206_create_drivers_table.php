@@ -23,7 +23,7 @@ class CreateDriversTable extends Migration
             $table->string('proEmail');
             $table->string('phoneNumber');
             $table->string('driverLicenseNumber');
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

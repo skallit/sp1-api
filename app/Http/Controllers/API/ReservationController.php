@@ -12,14 +12,27 @@ class ReservationController extends Controller
 {
     public $successStatus = 200;
 
+//    /**
+//     * getReservation api
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function getReservation(){
+//        $reservations = Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
+//            ->where('drivers.user_id', Auth::id())
+//            ->get('reservations.*');
+//        return response()->json(['success' => $reservations], $this->successStatus);
+//
+//    }
+
     /**
      * getReservation api
      *
      * @return \Illuminate\Http\Response
      */
-    public function getReservation(){
-        $reservations = Reservation::with('drivers')->join('drivers','driver_id','drivers.id')->where('drivers.user_id', Auth::id())->get('reservations.*');
-        return response()->json(['success' => $reservations], $this->successStatus);
+    public function getReservation($id){
+        $reservation = Reservation::find($id);
+        return response()->json(['success' => $reservation], $this->successStatus);
 
     }
 
