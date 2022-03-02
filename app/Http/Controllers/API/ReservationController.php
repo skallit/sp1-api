@@ -12,18 +12,18 @@ class ReservationController extends Controller
 {
     public $successStatus = 200;
 
-//    /**
-//     * getReservation api
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function getReservation(){
-//        $reservations = Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
-//            ->where('drivers.user_id', Auth::id())
-//            ->get('reservations.*');
-//        return response()->json(['success' => $reservations], $this->successStatus);
-//
-//    }
+    /**
+     * getReservation api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getReservations(){
+        $reservations = Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
+            ->where('drivers.user_id', Auth::id())
+            ->get('reservations.*');
+        return response()->json(['success' => $reservations], $this->successStatus);
+
+    }
 
     /**
      * getReservation api
@@ -36,16 +36,24 @@ class ReservationController extends Controller
 
     }
 
+
+
     public function delReservation($id){
+        $reservationId=Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
+            ->where('drivers.user_id', Auth::id())->where('reservations.id', $id)->get('reservations.id');
         $date = Carbon::parse(Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
             ->where('drivers.user_id', Auth::id())->findOrFail($id)->date);
         $dateDiff = $date->diffInDays(Carbon::now());
-        if($dateDiff > config('date.dayMaxAnnulation') ){
-            Reservation::with('drivers')->join('drivers','driver_id','drivers.id')->where('drivers.user_id', Auth::id())->findOrFail($id)->delete();
+        if($reservationId = $id and $dateDiff > config('date.dayMaxAnnulation')){
+            Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
+                ->where('drivers.user_id', Auth::id())->where('reservations.id', $id)->delete();
             return response('Suppression réussi');
         }
-        else{
+        elseif($dateDiff < config('date.dayMaxAnnulation') ){
             return response('Attention la réservation sera dans moins de 48h');
+        }
+        else{
+            return response('Vous n\'avez pas accez a cette réservation');
         }
     }
 }
