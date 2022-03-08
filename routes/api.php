@@ -18,7 +18,8 @@ Route::post('login',[\App\Http\Controllers\API\AuthController::class,'login']);
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('register', [\App\Http\Controllers\API\AuthController::class,'register']);
-    Route::post('getRegisteredUser', [\App\Http\Controllers\API\AuthController::class,'getRegisteredUser']);
+    Route::post('updatePassword', [\App\Http\Controllers\API\AuthController::class,'updatePassword']);
+    Route::get('getRegisteredUser', [\App\Http\Controllers\API\AuthController::class,'getRegisteredUser']);
     Route::get('getReservations', [\App\Http\Controllers\API\ReservationController::class,'getReservations']);
     Route::get('getReservation/{id}', [\App\Http\Controllers\API\ReservationController::class,'getReservation']);
     Route::get('getDriver', [\App\Http\Controllers\API\DriverController::class,'getDriver']);

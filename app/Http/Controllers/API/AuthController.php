@@ -55,6 +55,18 @@ class AuthController extends Controller
         return response()->json(['success'=>$success], $this->successStatus);
     }
 
+    public function updatePassword(Request $request){
+        $validator = Validator::make($request->all(),[
+            'password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $success = User::find(auth()->user()->id)->update(['password'=>$input['password']]);
+        return response()->json(['success'=>$success], $this->successStatus);
+    }
 
     /**
      * getRegisteredUser api
