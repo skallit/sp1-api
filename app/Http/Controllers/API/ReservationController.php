@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,9 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getReservations(){
-        $reservations = Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
-            ->where('drivers.user_id', Auth::id())
-            ->get('reservations.*');
+        $reservations = User::with('driver.reservations.typeDay')->with('driver.reservations.typeRoute')->with('driver.reservations.status')
+            ->with('driver.reservations.departureAgency')->with('driver.reservations.returnAgency')->with('driver.reservations.vehicle')
+            ->get();
         return response()->json(['success' => $reservations], $this->successStatus);
 
     }
