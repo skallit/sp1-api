@@ -9,9 +9,10 @@ class TypeDay extends Model
 {
     use HasFactory;
 
+
     protected $fillable = ['type'];
 
-    public function Reservations() {
+    public function reservations() {
         return $this->hasMany('App\Models\Reservation');
     }
 }

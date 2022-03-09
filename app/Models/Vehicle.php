@@ -16,7 +16,7 @@ class Vehicle extends Model
         'status',
     ];
 
-    public function Reservations() {
+    public function reservations() {
         return $this->hasMany('App\Models\Reservation');
     }
 }

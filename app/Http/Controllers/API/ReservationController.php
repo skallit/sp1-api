@@ -31,7 +31,8 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getReservation($id){
-        $reservation = Reservation::find($id);
+        $reservation = Reservation::where('id',$id)->with('typeDay')->with('typeRoute')->with('status')
+            ->with('driver')->with('departureAgency')->with('returnAgency')->with('vehicle')->first();
         return response()->json(['success' => $reservation], $this->successStatus);
 
     }

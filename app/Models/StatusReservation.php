@@ -5,20 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Driver extends Model
+class StatusReservation extends Model
 {
     use HasFactory;
-
-    protected $fillable =[
-        'name',
-        'firstName',
-        'street',
-        'postalCode',
-        'city',
-        'proEmail',
-        'phoneNumber',
-        'driverLicenseNumber',
-    ];
+    protected $fillable = ['status'];
 
     public function reservations() {
         return $this->hasMany('App\Models\Reservation');

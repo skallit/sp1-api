@@ -19,7 +19,7 @@ class CreateReservationsTable extends Migration
             $table->date('date');
             $table->foreignId('typeDay_id')->references('id')->on('type_days')->onDelete('cascade');
             $table->foreignId('typeRoute_id')->references('id')->on('type_routes')->onDelete('cascade');
-            $table->string('status');
+            $table->foreignId('status_id')->references('id')->on('status_reservations')->onDelete('cascade');
             $table->foreignId('driver_id')->references('id')->on('drivers')->onDelete('cascade');
             $table->foreignId('departureAgency_id')->references('id')->on('agency_sevens')->onDelete('cascade');
             $table->foreignId('returnAgency_id')->references('id')->on('agency_sevens')->onDelete('cascade');

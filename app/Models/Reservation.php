@@ -14,23 +14,28 @@ class Reservation extends Model
     protected $fillable = [
         'numberOfReservation',
         'date',
-        'status',
     ];
 
-    public function drivers() {
-        return $this->belongsTo('App\Models\Driver');
+    public function driver() {
+        return $this->belongsTo('App\Models\Driver','driver_id');
     }
 
     public function typeDay() {
-        return $this->belongsTo('App\Models\TypeDay');
+        return $this->belongsTo('App\Models\TypeDay','typeDay_id');
     }
     public function typeRoute() {
-        return $this->belongsTo('App\Models\TypeRoute');
+        return $this->belongsTo('App\Models\TypeRoute','typeRoute_id');
     }
-    public function agencySeven() {
-        return $this->belongsTo('App\Models\AgencySeven');
+    public function departureAgency() {
+        return $this->belongsTo('App\Models\AgencySeven','departureAgency_id');
+    }
+    public function returnAgency() {
+        return $this->belongsTo('App\Models\AgencySeven','returnAgency_id');
     }
     public function vehicle() {
-        return $this->belongsTo('App\Models\Vehicle');
+        return $this->belongsTo('App\Models\Vehicle','vehicle_id');
+    }
+    public function status() {
+        return $this->belongsTo('App\Models\StatusReservation','status_id');
     }
 }

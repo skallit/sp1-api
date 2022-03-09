@@ -14,7 +14,7 @@ class AgencySeven extends Model
         'department',
     ];
 
-    public function Reservations() {
+    public function reservations() {
         return $this->hasMany('App\Models\Reservation');
     }
 }
