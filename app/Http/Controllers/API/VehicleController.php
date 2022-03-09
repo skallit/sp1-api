@@ -21,7 +21,7 @@ class VehicleController extends Controller
     public function getVehicle()
     {
         $vehicle = Vehicle::all();
-        return response()->json(['success' => $vehicle], $this->successStatus);
+        return $vehicle;
     }
 
     /**

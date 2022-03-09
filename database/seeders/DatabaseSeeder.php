@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        ContractForm::factory(5)->create();
+        ContractForm::factory(50)->create();
         User::create([
             'name'=>'Test',
             'firstName'=> 'Tist',
@@ -33,11 +33,11 @@ class DatabaseSeeder extends Seeder
             'email'=>'test@test.fr',
             'password'=>Hash::make('12345678'),
         ]);
-         User::factory(10)->create();
-        AgencySeven::factory(10)->create();
-        Driver::factory(5)->create();
-        Vehicle::factory(5)->create();
-         Control::factory(5)->create();
-         Reservation::factory(5)->create();
+         User::factory(100)->create();
+        AgencySeven::factory(100)->create();
+        Driver::factory(50)->create();
+        Vehicle::factory(50)->create();
+         Control::factory(50)->create();
+         Reservation::factory(50)->create();
     }
 }
