@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\AgencySeven;
 use App\Models\Driver;
+use App\Models\TypeDay;
+use App\Models\TypeRoute;
 use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,11 +21,12 @@ class ReservationFactory extends Factory
         return [
             'numberOfReservation' => $this->faker->unique->numberBetween(1,50),
             'date' => $this->faker->date(),
-            'typeDay' => $this->faker->word(),
-            'typeRoute' => $this->faker->word(),
+            'typeDay_id' => TypeDay::inRandomOrder()->first()->id,
+            'typeRoute_id' => TypeRoute::inRandomOrder()->first()->id,
             'status' => $this->faker->word(),
             'driver_id'=>Driver::inRandomOrder()->first()->id,
-            'agencySeven_id'=>AgencySeven::inRandomOrder()->first()->id,
+            'departureAgency_id'=>AgencySeven::inRandomOrder()->first()->id,
+            'returnAgency_id'=>AgencySeven::inRandomOrder()->first()->id,
             'vehicle_id'=>Vehicle::inRandomOrder()->first()->id,
         ];
     }

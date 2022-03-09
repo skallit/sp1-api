@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AgencySeven extends Model
+class TypeRoute extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'city',
-        'department',
-    ];
+    protected $fillable = ['type'];
 
     public function Reservations() {
         return $this->hasMany('App\Models\Reservation');

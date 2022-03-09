@@ -51,7 +51,6 @@ class AuthController extends Controller
         $input['contractForm_id'] = Auth::user()->contractForm_id;
         $user = User::create($input);
         $success['token'] =  $user->createToken(env('APP_NAME'))->accessToken;
-        $success['name'] =  $user->name;
         return response()->json(['success'=>$success], $this->successStatus);
     }
 

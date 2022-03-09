@@ -15,4 +15,8 @@ class Vehicle extends Model
         'licensePlate',
         'status',
     ];
+
+    public function Reservations() {
+        return $this->hasMany('App\Models\Reservation');
+    }
 }

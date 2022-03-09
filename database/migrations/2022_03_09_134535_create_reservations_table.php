@@ -17,11 +17,12 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->string('numberOfReservation');
             $table->date('date');
-            $table->string('typeDay');
-            $table->string('typeRoute');
+            $table->foreignId('typeDay_id')->references('id')->on('type_days')->onDelete('cascade');
+            $table->foreignId('typeRoute_id')->references('id')->on('type_routes')->onDelete('cascade');
             $table->string('status');
             $table->foreignId('driver_id')->references('id')->on('drivers')->onDelete('cascade');
-            $table->foreignId('agencySeven_id')->references('id')->on('agency_sevens')->onDelete('cascade');
+            $table->foreignId('departureAgency_id')->references('id')->on('agency_sevens')->onDelete('cascade');
+            $table->foreignId('returnAgency_id')->references('id')->on('agency_sevens')->onDelete('cascade');
             $table->foreignId('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->timestamps();
         });
