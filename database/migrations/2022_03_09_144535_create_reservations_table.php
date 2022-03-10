@@ -22,7 +22,7 @@ class CreateReservationsTable extends Migration
             $table->foreignId('status_id')->references('id')->on('status_reservations')->onDelete('cascade');
             $table->foreignId('driver_id')->references('id')->on('drivers')->onDelete('cascade');
             $table->foreignId('departureAgency_id')->references('id')->on('agency_sevens')->onDelete('cascade');
-            $table->foreignId('returnAgency_id')->references('id')->on('agency_sevens')->onDelete('cascade');
+            $table->foreignId('returnAgency_id')->nullable()->references('id')->on('agency_sevens')->onDelete('cascade');
             $table->foreignId('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->timestamps();
         });

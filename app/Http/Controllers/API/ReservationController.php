@@ -22,6 +22,7 @@ class ReservationController extends Controller
         $reservations = User::with('driver.reservations.typeDay')->with('driver.reservations.typeRoute')->with('driver.reservations.status')
             ->with('driver.reservations.departureAgency')->with('driver.reservations.returnAgency')->with('driver.reservations.vehicle')
             ->get();
+        $reservations =$reservations[0]->driver;
         return response()->json(['success' => $reservations], $this->successStatus);
 
     }

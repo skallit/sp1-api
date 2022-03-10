@@ -27,4 +27,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('delReservation/{id}', [\App\Http\Controllers\API\ReservationController::class,'delReservation']);
     Route::get('getAgencySeven',[\App\Http\Controllers\API\AgencySevenController::class,'getAgencySeven']);
     Route::get('getVehicle', [\App\Http\Controllers\API\VehicleController::class,'getVehicle']);
+    Route::get('getTypeDay',[\App\Http\Controllers\API\TypeDayController::class,'getTypeDay']);
+    Route::get('getTypeRoute',[\App\Http\Controllers\API\TypeRouteController::class,'getTypeRoute']);
 });
