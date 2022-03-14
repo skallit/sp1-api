@@ -18,6 +18,7 @@ Route::post('login',[\App\Http\Controllers\API\AuthController::class,'login']);
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('register', [\App\Http\Controllers\API\AuthController::class,'register']);
+    Route::post('createReservation', [\App\Http\Controllers\API\ReservationController::class,'createReservation']);
     Route::post('updatePassword', [\App\Http\Controllers\API\AuthController::class,'updatePassword']);
     Route::get('getRegisteredUser', [\App\Http\Controllers\API\AuthController::class,'getRegisteredUser']);
     Route::get('getReservations', [\App\Http\Controllers\API\ReservationController::class,'getReservations']);

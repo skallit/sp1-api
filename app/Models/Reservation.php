@@ -14,6 +14,13 @@ class Reservation extends Model
     protected $fillable = [
         'numberOfReservation',
         'date',
+        'typeDay_id',
+        'typeRoute_id',
+        'vehicle_id',
+        'driver_id',
+        'returnAgency_id',
+        'status_id',
+        'departureAgency_id',
     ];
 
     public function driver() {
@@ -38,4 +45,5 @@ class Reservation extends Model
     public function status() {
         return $this->belongsTo('App\Models\StatusReservation','status_id');
     }
+
 }

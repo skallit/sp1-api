@@ -4,8 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Driver;
+use App\Models\Reservation;
+use Faker\Core\Number;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class DriverController extends Controller
 {
@@ -27,4 +30,5 @@ class DriverController extends Controller
         return response()->json(['success' => $drivers], $this->successStatus);
 
     }
+
 }

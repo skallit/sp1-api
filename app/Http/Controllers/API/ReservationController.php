@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ReservationController extends Controller
 {
@@ -58,5 +59,27 @@ class ReservationController extends Controller
         else{
             return response('Vous n\'avez pas accez a cette réservation');
         }
+    }
+
+    public function createReservation(Request $request){
+        $validator = Validator::make($request->all(), [
+            'departureAgency_id' => 'required',
+            'date' => 'required',
+            'typeDay_id' => 'required',
+            'typeRoute_id' => 'required',
+            'vehicle_id' => 'required',
+            'driver_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+        $input = $request->all();
+        $input['numberOfReservation'] = rand(1,5000);
+        do {
+            $input['numberOfReservation'] = mt_rand(1,5000);
+        } while ( Reservation::where( 'numberOfReservation', $input['numberOfReservation'] )->exists() );
+        $input['status_id'] = rand(1,2);
+        $success = Reservation::create($input);
+        return response()->json(['success'=>$success], $this->successStatus);
     }
 }
