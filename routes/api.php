@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('getReservation/{id}', [\App\Http\Controllers\API\ReservationController::class,'getReservation']);
     Route::get('getDriver', [\App\Http\Controllers\API\DriverController::class,'getDriver']);
     Route::get('getDriverReservation', [\App\Http\Controllers\API\DriverController::class,'getDriverReservation']);
+    Route::post('createDriver', [\App\Http\Controllers\API\DriverController::class,'createDriver']);
     Route::delete('delReservation/{id}', [\App\Http\Controllers\API\ReservationController::class,'delReservation']);
     Route::get('getAgencySeven',[\App\Http\Controllers\API\AgencySevenController::class,'getAgencySeven']);
     Route::get('getVehicle', [\App\Http\Controllers\API\VehicleController::class,'getVehicle']);

@@ -18,6 +18,7 @@ class Driver extends Model
         'proEmail',
         'phoneNumber',
         'driverLicenseNumber',
+        'user_id',
     ];
 
     public function reservations() {

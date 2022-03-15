@@ -31,4 +31,24 @@ class DriverController extends Controller
 
     }
 
+    public function createDriver(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'firstName' => 'required',
+            'street' => 'required',
+            'postalCode' => 'required',
+            'city' => 'required',
+            'proEmail' => 'required',
+            'phoneNumber' => 'required',
+            'driverLicenseNumber' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+        $input = $request->all();
+        $input['user_id'] = Auth::id();
+        $success = Driver::create($input);
+        return response()->json(['success'=>$success], $this->successStatus);
+    }
+
 }

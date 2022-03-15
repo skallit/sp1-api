@@ -36,22 +36,22 @@ class ReservationController extends Controller
     public function getReservation($id){
         $reservation = Reservation::where('id',$id)->with('typeDay')->with('typeRoute')->with('status')
             ->with('driver')->with('departureAgency')->with('returnAgency')->with('vehicle')->first();
-        return response()->json(['success' => $reservation], $this->successStatus);
-
+        if ($reservation->driver->user_id == Auth::id()) {
+            return response()->json(['success' => $reservation], $this->successStatus);
+        }else{
+            return response('Vous n\'avez pas accez a cette réservation');
+        }
     }
 
 
 
     public function delReservation($id){
-        $reservationId=Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
-            ->where('drivers.user_id', Auth::id())->where('reservations.id', $id)->get('reservations.id');
-        $date = Carbon::parse(Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
-            ->where('drivers.user_id', Auth::id())->findOrFail($id)->date);
+        $reservation=Reservation::where('id',$id)->with('driver')->first();
+        $date = Carbon::parse($reservation->date);
         $dateDiff = $date->diffInDays(Carbon::now());
-        if($reservationId = $id and $dateDiff > config('date.dayMaxAnnulation')){
-            Reservation::with('drivers')->join('drivers','driver_id','drivers.id')
-                ->where('drivers.user_id', Auth::id())->where('reservations.id', $id)->delete();
-            return response('Suppression réussi');
+        if($reservation->driver->user_id == Auth::id() and $dateDiff > config('date.dayMaxAnnulation')){
+            $delete = Reservation::where('id',$id)->delete();
+            return response()->json(['success' => $delete], $this->successStatus);
         }
         elseif($dateDiff < config('date.dayMaxAnnulation') ){
             return response('Attention la réservation sera dans moins de 48h');
