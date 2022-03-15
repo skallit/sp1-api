@@ -14,9 +14,14 @@ class Vehicle extends Model
         'numberOfSeats',
         'licensePlate',
         'status',
+        'vehicleStatus_id'
     ];
 
     public function reservations() {
         return $this->hasMany('App\Models\Reservation');
+    }
+
+    public function vehicle() {
+        return $this->belongsTo('App\Models\VehicleStatus','vehicleStatus_id');
     }
 }

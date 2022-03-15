@@ -27,6 +27,6 @@ class CreateTypeRoutesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('flights_type_route');
+        Schema::dropIfExists('type_routes');
     }
 }

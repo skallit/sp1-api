@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\TypeDay;
+use App\Models\VehicleStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VehicleFactory extends Factory
@@ -17,7 +19,7 @@ class VehicleFactory extends Factory
             'nameModel' => $this->faker->word(),
             'numberOfSeats' => $this->faker->numberBetween(2,5),
             'licensePlate' => $this->faker->randomNumber(5),
-            'status' => $this->faker->word(),
+            'statusVehicle_id' => VehicleStatus::inRandomOrder()->first()->id,
         ];
     }
 }

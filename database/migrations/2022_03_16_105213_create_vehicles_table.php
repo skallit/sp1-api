@@ -18,7 +18,7 @@ class CreateVehiclesTable extends Migration
             $table->string('nameModel');
             $table->integer('numberOfSeats');
             $table->string('licensePlate');
-            $table->string('status');
+            $table->foreignId('statusVehicle_id')->references('id')->on('vehicle_statuses')->onDelete('cascade');
             $table->timestamps();
         });
     }

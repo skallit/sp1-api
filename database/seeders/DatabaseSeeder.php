@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([StatusReservationSeeder::class, TypeDaySeeder::class, TypeRouteSeeder::class, VehicleStatusSeeder::class]);
         ContractForm::factory(50)->create();
         User::create([
             'name'=>'Test',
