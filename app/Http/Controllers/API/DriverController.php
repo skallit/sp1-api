@@ -21,13 +21,13 @@ class DriverController extends Controller
      */
     public function getDriver(){
         $drivers = Driver::where('user_id', Auth::id())->get();
-        return response()->json(['success' => $drivers], $this->successStatus);
+        return $drivers;
 
     }
 
     public function getDriverReservation(){
         $drivers = Driver::with('reservations')->where('user_id', Auth::id())->get();
-        return response()->json(['success' => $drivers], $this->successStatus);
+        return $drivers;
 
     }
 

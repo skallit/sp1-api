@@ -75,6 +75,6 @@ class AuthController extends Controller
     public function getRegisteredUser()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus);
+        return $user;
     }
 }
