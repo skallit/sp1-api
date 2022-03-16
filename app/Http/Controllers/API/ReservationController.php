@@ -37,7 +37,7 @@ class ReservationController extends Controller
         $reservation = Reservation::where('id',$id)->with('typeDay')->with('typeRoute')->with('status')
             ->with('driver')->with('departureAgency')->with('returnAgency')->with('vehicle')->first();
         if ($reservation->driver->user_id == Auth::id()) {
-            return response()->json(['success' => $reservation], $this->successStatus);
+            return $reservation;
         }else{
             return response('Vous n\'avez pas accez a cette réservation');
         }
@@ -51,7 +51,7 @@ class ReservationController extends Controller
         $dateDiff = $date->diffInDays(Carbon::now());
         if($reservation->driver->user_id == Auth::id() and $dateDiff > config('date.dayMaxAnnulation')){
             $delete = Reservation::where('id',$id)->delete();
-            return response()->json(['success' => $delete], $this->successStatus);
+            return $delete;
         }
         elseif($dateDiff < config('date.dayMaxAnnulation') ){
             return response('Attention la réservation sera dans moins de 48h');
@@ -80,6 +80,6 @@ class ReservationController extends Controller
         } while ( Reservation::where( 'numberOfReservation', $input['numberOfReservation'] )->exists() );
         $input['status_id'] = rand(1,2);
         $success = Reservation::create($input);
-        return response()->json(['success'=>$success], $this->successStatus);
+        return $success;
     }
 }

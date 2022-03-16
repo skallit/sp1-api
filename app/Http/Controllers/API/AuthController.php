@@ -20,7 +20,7 @@ class AuthController extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken(env('APP_NAME'))->accessToken;
-            return response()->json(['success' => $success], $this->successStatus);
+            return $success;
         }
         else{
             return response()->json(['error'=>'Unauthorised'], 401);
@@ -51,7 +51,7 @@ class AuthController extends Controller
         $input['contractForm_id'] = Auth::user()->contractForm_id;
         $user = User::create($input);
         $success['token'] =  $user->createToken(env('APP_NAME'))->accessToken;
-        return response()->json(['success'=>$success], $this->successStatus);
+        return $success;
     }
 
     public function updatePassword(Request $request){
@@ -64,7 +64,7 @@ class AuthController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $success = User::find(auth()->user()->id)->update(['password'=>$input['password']]);
-        return response()->json(['success'=>$success], $this->successStatus);
+        return $success;
     }
 
     /**

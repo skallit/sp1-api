@@ -17,7 +17,7 @@ class AgencySevenController extends Controller
      */
     public function getAgencySeven(){
         $agencySeven = AgencySeven::all();
-        return response()->json(['success' => $agencySeven], $this->successStatus);
+        return $agencySeven;
 
     }
 }

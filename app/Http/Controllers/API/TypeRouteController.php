@@ -17,7 +17,7 @@ class TypeRouteController extends Controller
     public function getTypeRoute()
     {
         $typeRoute = TypeRoute::all();
-        return response()->json(['success' => $typeRoute], $this->successStatus);
+        return $typeRoute;
     }
 
     /**

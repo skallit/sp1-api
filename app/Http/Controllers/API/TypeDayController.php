@@ -18,7 +18,7 @@ class TypeDayController extends Controller
     public function getTypeDay()
     {
         $typeDay = TypeDay::all();
-        return response()->json(['success' => $typeDay], $this->successStatus);
+        return $typeDay;
     }
 
     /**

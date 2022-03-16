@@ -48,7 +48,7 @@ class DriverController extends Controller
         $input = $request->all();
         $input['user_id'] = Auth::id();
         $success = Driver::create($input);
-        return response()->json(['success'=>$success], $this->successStatus);
+        return $success;
     }
 
 }
