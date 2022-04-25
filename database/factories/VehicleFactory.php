@@ -13,10 +13,12 @@ class VehicleFactory extends Factory
      */
     public function definition()
     {
+        $carfaker = (new \Faker\Factory())::create();
+        $carfaker->addProvider(new \Faker\Provider\Fakecar($carfaker));
         return [
-            'nameModel' => $this->faker->word(),
+            'nameModel' => $carfaker->vehicle,
             'numberOfSeats' => $this->faker->numberBetween(2,5),
-            'licensePlate' => $this->faker->randomNumber(5),
+            'licensePlate' => $carfaker->vehicleRegistration('[A-Z]{2}-[0-9]{5}'),
             'status' => $this->faker->word(),
         ];
     }
